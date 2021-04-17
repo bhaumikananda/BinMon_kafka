@@ -16,17 +16,24 @@ public class BinmonKafkaRestController {
 	private final AtomicLong counter = new AtomicLong();
 
 	@ResponseBody
-	@RequestMapping(value = "/match", method = RequestMethod.GET)
-	public MatchResult derbyMatch(@RequestParam(value = "team", required = true) String team) {
-		System.out.println("This is a new request");
-		return new MatchResult("EastBengal", team);
-	}
-
-	@ResponseBody
 	@RequestMapping("/")
 	public MatchResult match(String name) {
-		System.out.println("Test 1");
+		System.out.println("This is catch all");
 		return new MatchResult(name, "EastBengal");
+	}
+	
+	@ResponseBody
+	@RequestMapping(value = "/match", method = RequestMethod.GET)
+	public MatchResult derbyMatch(@RequestParam(value = "team", required = true) String team) {
+		System.out.println("This is a new get request");
+		return new MatchResult("EastBengal", team);
+	}
+	
+	@ResponseBody
+	@RequestMapping(value = "/matchResult", method = RequestMethod.POST)
+	public MatchResult derbyMatchResult(@RequestParam(value = "otherTeam", required = true) String team) {
+		System.out.println("This is a new post request");
+		return new MatchResult("EastBengal", team);
 	}
 	
 }
